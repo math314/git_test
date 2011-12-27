@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace git_test
 {
-    public class mineController
+    public class MineController
     {
 
         /// <summary> 縦方向のブロック数 </summary>
@@ -14,7 +14,7 @@ namespace git_test
         /// <summary> 横方向のブロック数 </summary>
         public int HBlock;
 
-        public mineController()
+        public MineController()
         {
             VBlock = 10;
             HBlock = 15;

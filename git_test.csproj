@@ -49,7 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MineCell.cs" />
     <Compile Include="mineController.cs" />
+    <Compile Include="MineModel.cs" />
+    <Compile Include="MineTable.cs" />
     <Compile Include="MineView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
