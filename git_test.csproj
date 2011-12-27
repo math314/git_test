@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MineCell.cs" />
-    <Compile Include="mineController.cs" />
+    <Compile Include="MineController.cs" />
     <Compile Include="MineModel.cs" />
     <Compile Include="MineTable.cs" />
     <Compile Include="MineView.cs" />

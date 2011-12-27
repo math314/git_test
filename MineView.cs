@@ -8,6 +8,17 @@ namespace git_test
 {
     public class MineView
     {
+        private readonly MineModel _model;
+
+        /// <summary>
+        /// マインスイーパのビュー
+        /// </summary>
+        /// <param name="model"></param>
+        public MineView(MineModel model)
+        {
+            _model = model;
+        }
+
         public void Draw()
         {
             Console.WriteLine("0%     50%     100%");

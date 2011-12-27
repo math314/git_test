@@ -7,5 +7,11 @@ namespace git_test
 {
     public class MineModel
     {
+        private MineTable _table;
+
+        public MineModel()
+        {
+            _table = new MineTable(20, 30);
+        }
     }
 }

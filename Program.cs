@@ -8,7 +8,10 @@ namespace git_test
     {
         static int Main(string[] args)
         {
-            MineView view = new MineView();
+            MineModel model = new MineModel();
+            MineView view = new MineView(model);
+
+            MineController ctl = new MineController(model);
 
             view.Draw();
 

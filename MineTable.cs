@@ -29,9 +29,34 @@ namespace git_test
             }
         }
 
+        /// <summary>
+        /// セルを取得します
+        /// </summary>
+        /// <param name="x">x座標</param>
+        /// <param name="y">y座標</param>
+        /// <returns>セル</returns>
+        public MineCell this[int x,int y]
+        {
+            get{
+                return _cells[x][y];
+            }
+        }
+
+        /// <summary>
+        /// テーブルを作成します
+        /// </summary>
+        /// <param name="w"></param>
+        /// <param name="h"></param>
         public MineTable(int w,int h)
         {
+            //セルの作成
             _cells = new MineCell[w][];
+            for (int i = 0; i < w; i++)
+            {
+                _cells[i] = new MineCell[h];
+                for (int j = 0; j < h; j++)
+                    _cells[i][j] = new MineCell(this, i, j);
+            }
         }
     }
 }
