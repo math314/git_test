@@ -10,8 +10,9 @@ namespace git_test
         {
             MineModel model = new MineModel();
             MineView view = new MineView(model);
-
             MineController ctl = new MineController(model);
+            MineReceiver receiver = new MineReceiver(ctl);
+
 
             view.Draw();
 

@@ -19,5 +19,11 @@ namespace git_test
             _model = model;
         }
 
+        /// <summary>
+        /// 現在のセルを選択する
+        /// </summary>
+        internal void SelectCurrentCell()
+        {
+        }
     }
 }

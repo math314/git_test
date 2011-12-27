@@ -12,7 +12,7 @@ namespace git_test
         public bool IsOpened;
 
         /// <summary> 爆弾かどうか </summary>
-        public bool IsBomb{get;set;}
+        public bool IsBomb { get; set; }
 
         private readonly MineTable _parent;
         private readonly Point _point;
