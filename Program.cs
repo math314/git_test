@@ -12,9 +12,11 @@ namespace git_test
             MineView view = new MineView(model);
             MineController ctl = new MineController(model);
             MineReceiver receiver = new MineReceiver(ctl);
-
-
-            view.Draw();
+            do
+            {
+                view.Draw();
+            }
+            while (receiver.Receive()); // 入力を受け取れる間はループする
 
             return 0;
         }

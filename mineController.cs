@@ -20,10 +20,11 @@ namespace git_test
         }
 
         /// <summary>
-        /// 現在のセルを選択する
+        /// 現在のセルを開く
         /// </summary>
-        internal void SelectCurrentCell()
+        public void OpenCurrentCell()
         {
+            _model.Table.Current.Open();    //現在のセルを開いた
         }
     }
 }

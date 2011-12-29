@@ -23,13 +23,15 @@ namespace git_test
         {
             ConsoleKeyInfo ck = Console.ReadKey(true);
 
-            if (ck.Key == ConsoleKey.Enter)
+            switch (ck.Key)
             {
-                _ctl.SelectCurrentCell();
-            }
-            else if(ck.Key == ConsoleKey.Escape)
-            {
-
+                case ConsoleKey.Enter:
+                    _ctl.OpenCurrentCell();　//現在のセルを選択状態にする
+                    break;
+                case ConsoleKey.Escape:
+                    return false; //これ以上入力を受け取らない
+                default:
+                    break;
             }
 
             return true;

@@ -9,9 +9,17 @@ namespace git_test
     {
         private MineTable _table;
 
+        /// <summary>
+        /// マインスイーパのテーブル
+        /// </summary>
+        public MineTable Table
+        {
+            get { return _table; }
+        }
+
         public MineModel()
         {
-            _table = new MineTable(20, 30);
+            _table = new MineTable(40, 20);
         }
     }
 }

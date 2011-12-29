@@ -29,16 +29,30 @@ namespace git_test
             }
         }
 
+        public int CurrentColumnIdx { get; set; }
+        public int CurrentRowIdx { get; set; }
+
+        /// <summary>
+        /// 現在のセル
+        /// </summary>
+        public MineCell Current
+        {
+            get
+            {
+                return this[CurrentColumnIdx, CurrentRowIdx];
+            }
+        }
+
         /// <summary>
         /// セルを取得します
         /// </summary>
-        /// <param name="x">x座標</param>
-        /// <param name="y">y座標</param>
+        /// <param name="col">列</param>
+        /// <param name="row">行</param>
         /// <returns>セル</returns>
-        public MineCell this[int x,int y]
+        public MineCell this[int col,int row]
         {
             get{
-                return _cells[x][y];
+                return _cells[col][row];
             }
         }
 

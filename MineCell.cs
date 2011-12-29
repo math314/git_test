@@ -15,12 +15,43 @@ namespace git_test
         public bool IsBomb { get; set; }
 
         private readonly MineTable _parent;
-        private readonly Point _point;
+
+        /// <summary>
+        /// 行
+        /// </summary>
+        public int RowIndex { get; set; }
+        /// <summary>
+        /// 列
+        /// </summary>
+        public int ColumnIndex { get; set; }
+
 
         public MineCell(MineTable parent, int col, int row)
         {
             _parent = parent;
-            _point = new Point(col, row);
+            RowIndex = row;
+            ColumnIndex = col;
+        }
+
+        /// <summary>
+        /// このセルを開く
+        /// </summary>
+        public void Open()
+        {
+            IsOpened = true;
+        }
+
+        public char ToChar()
+        {
+            if (IsOpened)
+                return 'o';
+            else
+                return 'x';
+        }
+
+        public override string ToString()
+        {
+            return ToChar().ToString();
         }
     }
 }

@@ -53,6 +53,7 @@
     <Compile Include="MineController.cs" />
     <Compile Include="MineModel.cs" />
     <Compile Include="MineReceiver.cs" />
+    <Compile Include="MineRows.cs" />
     <Compile Include="MineTable.cs" />
     <Compile Include="MineView.cs" />
     <Compile Include="Program.cs" />

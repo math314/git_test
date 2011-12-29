@@ -19,18 +19,27 @@ namespace git_test
             _model = model;
         }
 
+        /// <summary>
+        /// 現在のセルを状態を描画します
+        /// </summary>
         public void Draw()
         {
-            Console.WriteLine("0%     50%     100%");
-            string line = "+-------+-------+";
-            Console.WriteLine(line);
+            //カーソルの位置を最初に戻す
+            Console.SetCursorPosition(0, 0);
 
-            for (int i = 0; i < 100; i++)
+            //セルをすべて表示
+            for (int i = 0; i < _model.Table.RowCount; i++)
             {
-                Console.Write(new string('#',  i * line.Length / 100));
-                Console.Write("\r");
-                Thread.Sleep(30);
+                for (int j = 0; j < _model.Table.ColumnCount; j++)
+                {
+                    Console.Write(_model.Table[j, i].ToChar());
+                }
+
+                //次の行に移動する
+                Console.Write('\n');
             }
+
+            Console.SetCursorPosition(_model.Table.Current.ColumnIndex, _model.Table.Current.RowIndex);
         }
     }
 }
