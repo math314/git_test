@@ -11,6 +11,14 @@ namespace git_test
         private readonly MineModel _model;
 
         /// <summary>
+        /// MineTableの取得
+        /// </summary>
+        private MineTable table
+        {
+            get { return _model.Table; }
+        }
+
+        /// <summary>
         /// マインスイーパのビュー
         /// </summary>
         /// <param name="model"></param>
@@ -27,19 +35,34 @@ namespace git_test
             //カーソルの位置を最初に戻す
             Console.SetCursorPosition(0, 0);
 
+            //セルの状態を描画する
+            Console.Write(GetCells());
+
+            //カーソルの位置を戻す
+            Console.SetCursorPosition(table.Current.ColumnIndex, table.Current.RowIndex);
+        }
+
+        /// <summary>
+        /// 現在のセルの状態を、文字列として取得します
+        /// </summary>
+        /// <returns></returns>
+        private string GetCells()
+        {
+            StringBuilder sb = new StringBuilder(table.RowCount * ( table.ColumnCount + 1));
+
             //セルをすべて表示
-            for (int i = 0; i < _model.Table.RowCount; i++)
+            for (int i = 0; i < table.RowCount; i++)
             {
-                for (int j = 0; j < _model.Table.ColumnCount; j++)
+                for (int j = 0; j < table.ColumnCount; j++)
                 {
-                    Console.Write(_model.Table[j, i].ToChar());
+                    sb.Append(table[j, i].ToChar());
                 }
 
                 //次の行に移動する
-                Console.Write('\n');
+                sb.Append('\n');
             }
 
-            Console.SetCursorPosition(_model.Table.Current.ColumnIndex, _model.Table.Current.RowIndex);
+            return sb.ToString();
         }
     }
 }
