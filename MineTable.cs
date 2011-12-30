@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Collections;
 
 namespace git_test
 {
-    public class MineTable
+    public class MineTable : IEnumerable<MineRow>
     {
-        /// <summary> マス </summary>
-        MineCell[][] _cells;
+        /// <summary> 行 </summary>
+        private readonly MineRow[] _rows;
+
+        /// <summary> 列数 </summary>
+        private readonly int _colCount;
 
         /// <summary> 列数 </summary>
         public int ColumnCount
         {
             get
             {
-                return _cells.Length;
+                return _colCount;
             }
         }
 
@@ -25,7 +29,7 @@ namespace git_test
         {
             get
             {
-                return _cells[0].Length;
+                return _rows.Length;
             }
         }
 
@@ -39,20 +43,19 @@ namespace git_test
         {
             get
             {
-                return this[CurrentColumnIdx, CurrentRowIdx];
+                return this[CurrentColumnIdx][CurrentColumnIdx];
             }
         }
 
         /// <summary>
         /// セルを取得します
         /// </summary>
-        /// <param name="col">列</param>
-        /// <param name="row">行</param>
+        /// <param name="row">行番号</param>
         /// <returns>セル</returns>
-        public MineCell this[int col,int row]
+        public MineRow this[int row]
         {
             get{
-                return _cells[col][row];
+                return _rows[row];
             }
         }
 
@@ -61,16 +64,26 @@ namespace git_test
         /// </summary>
         /// <param name="w"></param>
         /// <param name="h"></param>
-        public MineTable(int w,int h)
+        public MineTable(int w, int h)
         {
+            _colCount = w;  //横幅の設定
+
             //セルの作成
-            _cells = new MineCell[w][];
-            for (int i = 0; i < w; i++)
+            _rows = new MineRow[h];
+            for (int i = 0; i < h; i++)
             {
-                _cells[i] = new MineCell[h];
-                for (int j = 0; j < h; j++)
-                    _cells[i][j] = new MineCell(this, i, j);
+                _rows[i] = new MineRow(this,i);
             }
+        }
+
+        public IEnumerator<MineRow> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

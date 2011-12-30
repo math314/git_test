@@ -14,23 +14,30 @@ namespace git_test
         /// <summary> 爆弾かどうか </summary>
         public bool IsBomb { get; set; }
 
-        private readonly MineTable _parent;
+        private readonly MineRow _parent;
 
         /// <summary>
         /// 行
         /// </summary>
-        public int RowIndex { get; set; }
+        public int RowIndex
+        {
+            get { return _parent.Index; }
+        }
+
+        private readonly int _index;
+
         /// <summary>
         /// 列
         /// </summary>
-        public int ColumnIndex { get; set; }
+        public int ColumnIndex {
+            get { return _index; }
+        }
 
 
-        public MineCell(MineTable parent, int col, int row)
+        public MineCell(MineRow parent, int col)
         {
             _parent = parent;
-            RowIndex = row;
-            ColumnIndex = col;
+            _index = col;
         }
 
         /// <summary>

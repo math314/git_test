@@ -55,7 +55,7 @@ namespace git_test
             {
                 for (int j = 0; j < table.ColumnCount; j++)
                 {
-                    sb.Append(table[j, i].ToChar());
+                    sb.Append(table[i][j].ToChar());
                 }
 
                 //次の行に移動する
