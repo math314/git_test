@@ -33,20 +33,6 @@ namespace git_test
             }
         }
 
-        public int CurrentColumnIdx { get; set; }
-        public int CurrentRowIdx { get; set; }
-
-        /// <summary>
-        /// 現在のセル
-        /// </summary>
-        public MineCell Current
-        {
-            get
-            {
-                return this[CurrentRowIdx][CurrentColumnIdx];
-            }
-        }
-
         /// <summary>
         /// セルを取得します
         /// </summary>

@@ -17,9 +17,36 @@ namespace git_test
             get { return _table; }
         }
 
+        /// <summary>
+        /// 現在選択されているセルの列
+        /// </summary>
+        public int CurrentColumnIdx { get; set; }
+        /// <summary>
+        /// 現在選択されているセルの行
+        /// </summary>
+        public int CurrentRowIdx { get; set; }
+
+        /// <summary>
+        /// 現在のセル
+        /// </summary>
+        public MineCell Current
+        {
+            get
+            {
+                return _table[CurrentRowIdx][CurrentColumnIdx];
+            }
+        }
+
+        /// <summary>
+        /// ボムの合計数
+        /// </summary>
+        public int BombSum { get; set; }
+
+
         public MineModel()
         {
             _table = new MineTable(40, 20);
+            BombSum = 30;
         }
     }
 }

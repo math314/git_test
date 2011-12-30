@@ -22,6 +22,30 @@ namespace git_test
         public MineController(MineModel model)
         {
             _model = model;
+
+            InitModel(); //モデルの初期化
+        }
+
+        /// <summary>
+        /// モデルの初期化
+        /// </summary>
+        private void InitModel()
+        {
+            if(_model.BombSum > _model.Table.ColumnCount * _model.Table.RowCount)
+                throw new Exception("ボムの量が多すぎます");
+
+            Random rand = new Random(); //乱数生成器
+            for (int i = 0; i < _model.BombSum; i++)
+            {
+                    int row = rand.Next(table.RowCount);
+                    int col = rand.Next(table.ColumnCount);
+                MineCell cell = table[row][col]; 
+
+                while(cell.IsBomb) //もしボムなら
+                    cell = cell.NextCell(); //次のセルを取得
+
+                    table[row][col].IsBomb = true; // ボムを設定する
+            }
         }
 
         /// <summary>
@@ -29,7 +53,7 @@ namespace git_test
         /// </summary>
         public void OpenCurrentCell()
         {
-            table.Current.Open();    //現在のセルを開いた
+            _model.Current.Open();    //現在のセルを開いた
         }
 
         /// <summary>
@@ -41,16 +65,16 @@ namespace git_test
             switch (moveDirection)
             {
                 case MoveDirection.Up:
-                    table.CurrentRowIdx = Math.Max(table.CurrentRowIdx - 1, 0);
+                    _model.CurrentRowIdx = Math.Max(_model.CurrentRowIdx - 1, 0);
                     break;
                 case MoveDirection.Down:
-                    table.CurrentRowIdx = Math.Min(table.CurrentRowIdx + 1, table.RowCount - 1);
+                    _model.CurrentRowIdx = Math.Min(_model.CurrentRowIdx + 1, table.RowCount - 1);
                     break;
                 case MoveDirection.Left:
-                    table.CurrentColumnIdx = Math.Max(table.CurrentColumnIdx - 1, 0);
+                    _model.CurrentColumnIdx = Math.Max(_model.CurrentColumnIdx - 1, 0);
                     break;
                 case MoveDirection.Right:
-                    table.CurrentColumnIdx = Math.Min(table.CurrentColumnIdx + 1, table.ColumnCount - 1);
+                    _model.CurrentColumnIdx = Math.Min(_model.CurrentColumnIdx + 1, table.ColumnCount - 1);
                     break;
                 default:
                     break;

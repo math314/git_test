@@ -68,6 +68,25 @@ namespace git_test
             IsOpened = true;
         }
 
+
+        /// <summary>
+        /// 次のセルを取得する
+        /// </summary>
+        /// <returns></returns>
+        public MineCell NextCell()
+        {
+            if (ColumnIndex >= Table.ColumnCount - 1)
+                return (RowIndex < Table.RowCount - 1) ? Table[0][RowIndex] : Table[0][0];
+            else
+                return Table[ColumnIndex + 1][RowIndex];
+        }
+
+        #region セルの状態の取得
+
+        /// <summary>
+        /// 現在のセルの状態を、文字として取得します
+        /// </summary>
+        /// <returns></returns>
         public char ToChar()
         {
             if (IsOpened)
@@ -75,7 +94,7 @@ namespace git_test
                 if (IsBomb)
                     return '*'; //ボムだった
 
-                int bombCount = CountAroundBombs() ;
+                int bombCount = CountAroundBombs();
                 if (bombCount == 0)
                     return '.'; //周りにボムがなかった！
                 else
@@ -86,6 +105,7 @@ namespace git_test
                 return 'x';
             }
         }
+
 
         /// <summary>
         /// まわりのボム数を数える
@@ -127,9 +147,12 @@ namespace git_test
             }
         }
 
+        #endregion
+
         public override string ToString()
         {
             return ToChar().ToString();
         }
+
     }
 }

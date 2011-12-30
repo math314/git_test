@@ -44,7 +44,7 @@ namespace git_test
             Console.Write(GetTableInfo());
 
             //カーソルの位置を戻す
-            Console.SetCursorPosition(table.Current.ColumnIndex, table.Current.RowIndex);
+            Console.SetCursorPosition(_model.Current.ColumnIndex, _model.Current.RowIndex);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace git_test
 
         private string GetTableInfo()
         {
-            return string.Format("cursor : col {0},row {1}",table.Current.ColumnIndex,table.Current.RowIndex)
+            return string.Format("cursor : col {0},row {1}", _model.Current.ColumnIndex, _model.Current.RowIndex)
                 .PadRight(30);
         }
     }
