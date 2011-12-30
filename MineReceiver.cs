@@ -30,6 +30,18 @@ namespace git_test
                     break;
                 case ConsoleKey.Escape:
                     return false; //これ以上入力を受け取らない
+                case ConsoleKey.UpArrow:
+                    _ctl.MoveCursor(MoveDirection.Up);
+                    break;
+                case ConsoleKey.DownArrow:
+                    _ctl.MoveCursor(MoveDirection.Down);
+                    break;
+                case ConsoleKey.RightArrow:
+                    _ctl.MoveCursor(MoveDirection.Right);
+                    break;
+                case ConsoleKey.LeftArrow:
+                    _ctl.MoveCursor(MoveDirection.Left);
+                    break;
                 default:
                     break;
             }
@@ -37,5 +49,13 @@ namespace git_test
             return true;
         }
 
+    }
+
+    public enum MoveDirection
+    {
+        Up,
+        Down,
+        Right,
+        Left,
     }
 }

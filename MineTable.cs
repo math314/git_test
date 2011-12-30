@@ -43,7 +43,7 @@ namespace git_test
         {
             get
             {
-                return this[CurrentColumnIdx][CurrentColumnIdx];
+                return this[CurrentRowIdx][CurrentColumnIdx];
             }
         }
 
@@ -78,7 +78,10 @@ namespace git_test
 
         public IEnumerator<MineRow> GetEnumerator()
         {
-            throw new NotImplementedException();
+            foreach (var item in _rows)
+            {
+                yield return item;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()

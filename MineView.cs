@@ -38,6 +38,11 @@ namespace git_test
             //セルの状態を描画する
             Console.Write(GetCells());
 
+            Console.WriteLine("");
+
+            //テーブルの情報を描画する
+            Console.Write(GetTableInfo());
+
             //カーソルの位置を戻す
             Console.SetCursorPosition(table.Current.ColumnIndex, table.Current.RowIndex);
         }
@@ -50,12 +55,11 @@ namespace git_test
         {
             StringBuilder sb = new StringBuilder(table.RowCount * ( table.ColumnCount + 1));
 
-            //セルをすべて表示
-            for (int i = 0; i < table.RowCount; i++)
+            foreach (var row in table)
             {
-                for (int j = 0; j < table.ColumnCount; j++)
+                foreach (var cell in row)
                 {
-                    sb.Append(table[i][j].ToChar());
+                    sb.Append(cell.ToChar());
                 }
 
                 //次の行に移動する
@@ -63,6 +67,12 @@ namespace git_test
             }
 
             return sb.ToString();
+        }
+
+        private string GetTableInfo()
+        {
+            return string.Format("cursor : col {0},row {1}",table.Current.ColumnIndex,table.Current.RowIndex)
+                .PadRight(30);
         }
     }
 }

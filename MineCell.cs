@@ -21,7 +21,7 @@ namespace git_test
         /// </summary>
         public int RowIndex
         {
-            get { return _parent.Index; }
+            get { return _parent.RowIndex; }
         }
 
         private readonly int _index;

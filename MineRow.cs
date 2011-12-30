@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
 
 namespace git_test
 {
-    public class MineRow
+    public class MineRow : IEnumerable<MineCell>
     {
         private readonly MineTable _parent;
         private readonly int _rowIdx;
@@ -13,7 +14,7 @@ namespace git_test
         /// <summary>
         /// 列のインデックス
         /// </summary>
-        public int Index
+        public int RowIndex
         {
             get { return _rowIdx; }
         }
@@ -41,6 +42,26 @@ namespace git_test
             {
                 _cells[i] = new MineCell(this, i);
             }
+        }
+
+        public IEnumerator<MineCell> GetEnumerator()
+        {
+            foreach (var item in _cells)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Row :{0} {1}", _rowIdx,
+                new string(_cells.Select(cell => cell.ToChar()).ToArray())
+                );   
         }
     }
 }
