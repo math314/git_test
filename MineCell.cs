@@ -138,7 +138,7 @@ namespace git_test
                 if (ColumnIndex > 0)
                     yield return Table[RowIndex - 1][ColumnIndex - 1];
                 yield return Table[RowIndex - 1][ColumnIndex];
-                if (ColumnIndex < Table.RowCount - 1)
+                if (ColumnIndex < Table.ColumnCount - 1)
                     yield return Table[RowIndex - 1][ColumnIndex + 1];
             }
 
@@ -154,7 +154,7 @@ namespace git_test
                 if (ColumnIndex > 0)
                     yield return Table[RowIndex + 1][ColumnIndex - 1];
                 yield return Table[RowIndex + 1][ColumnIndex];
-                if (ColumnIndex < Table.RowCount - 1)
+                if (ColumnIndex < Table.ColumnCount - 1)
                     yield return Table[RowIndex + 1][ColumnIndex + 1];
             }
         }

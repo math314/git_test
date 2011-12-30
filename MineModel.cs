@@ -46,7 +46,7 @@ namespace git_test
         public MineModel()
         {
             _table = new MineTable(40, 20);
-            BombSum = 30;
+            BombSum = 60;
         }
     }
 }
