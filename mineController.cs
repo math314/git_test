@@ -53,7 +53,12 @@ namespace git_test
         /// </summary>
         public void OpenCurrentCell()
         {
-            _model.Current.Open();    //現在のセルを開いた
+            var current = _model.Current;
+
+            if (current.IsOpened) //既に開かれていたら
+                return; //何もせず帰る
+
+            current.Open();    //現在のセルを開く
         }
 
         /// <summary>

@@ -11,7 +11,7 @@ namespace git_test
         #region メンバ変数、プロパティ
 
         /// <summary> セルが開かれたかどうか </summary>
-        public bool IsOpened;
+        public bool IsOpened { get; set; }
 
         /// <summary> 爆弾かどうか </summary>
         public bool IsBomb { get; set; }
@@ -65,7 +65,19 @@ namespace git_test
         /// </summary>
         public void Open()
         {
+            if (IsOpened)
+                return; //既に開かれていた
+
             IsOpened = true;
+
+            if (IsBomb)
+                return; //ボムだったら帰る
+
+            if (CountAroundBombs() == 0) //ボムがなかったら
+            {
+                foreach (var cell in EnumerateAroundCells())
+                    cell.Open(); //周りのセルも開く
+            }
         }
 
 
@@ -76,9 +88,9 @@ namespace git_test
         public MineCell NextCell()
         {
             if (ColumnIndex >= Table.ColumnCount - 1)
-                return (RowIndex < Table.RowCount - 1) ? Table[0][RowIndex] : Table[0][0];
+                return (RowIndex < Table.RowCount - 1) ? Table[RowIndex][0] : Table[0][0];
             else
-                return Table[ColumnIndex + 1][RowIndex];
+                return Table[RowIndex][ColumnIndex + 1];
         }
 
         #region セルの状態の取得
@@ -110,7 +122,7 @@ namespace git_test
         /// <summary>
         /// まわりのボム数を数える
         /// </summary>
-        private int CountAroundBombs()
+        public int CountAroundBombs()
         {
             return EnumerateAroundCells().Count(cell => cell.IsBomb);
         }
@@ -118,7 +130,7 @@ namespace git_test
         /// <summary>
         /// 周りのボムを列挙します
         /// </summary>
-        protected virtual IEnumerable<MineCell> EnumerateAroundCells()
+        public virtual IEnumerable<MineCell> EnumerateAroundCells()
         {
             //上のセル
             if (RowIndex > 0)
@@ -151,7 +163,7 @@ namespace git_test
 
         public override string ToString()
         {
-            return ToChar().ToString();
+            return string.Format("({0},{1}) : {2}",ColumnIndex,RowIndex, ToChar());
         }
 
     }
