@@ -85,5 +85,13 @@ namespace git_test
                     break;
             }
         }
+
+        /// <summary>
+        /// フラグを反転させる
+        /// </summary>
+        public void TurnFlag()
+        {
+            _model.Current.TurnFlag();
+        }
     }
 }

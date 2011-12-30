@@ -16,6 +16,9 @@ namespace git_test
         /// <summary> 爆弾かどうか </summary>
         public bool IsBomb { get; set; }
 
+        /// <summary> フラグが立てられているかどうか </summary>
+        public bool IsFlaged { get; set; }
+
         private readonly MineRow _parent;
 
         /// <summary>
@@ -65,8 +68,8 @@ namespace git_test
         /// </summary>
         public void Open()
         {
-            if (IsOpened)
-                return; //既に開かれていた
+            if (IsOpened || IsFlaged)
+                return; //開けなかった
 
             IsOpened = true;
 
@@ -80,6 +83,16 @@ namespace git_test
             }
         }
 
+        /// <summary>
+        /// 旗マークを反転させる
+        /// </summary>
+        public void TurnFlag()
+        {
+            if (IsOpened)
+                return; //開かれていたらフラグは立てない
+
+            IsFlaged = !IsFlaged; //フラグの反転
+        }
 
         /// <summary>
         /// 次のセルを取得する
@@ -92,8 +105,6 @@ namespace git_test
             else
                 return Table[RowIndex][ColumnIndex + 1];
         }
-
-        #region セルの状態の取得
 
         /// <summary>
         /// 現在のセルの状態を、文字として取得します
@@ -114,10 +125,12 @@ namespace git_test
             }
             else
             {
-                return 'x';
+                if (IsFlaged)
+                    return 'F'; //フラグが立てられている
+                else
+                    return 'x';
             }
         }
-
 
         /// <summary>
         /// まわりのボム数を数える
@@ -159,12 +172,9 @@ namespace git_test
             }
         }
 
-        #endregion
-
         public override string ToString()
         {
             return string.Format("({0},{1}) : {2}",ColumnIndex,RowIndex, ToChar());
         }
-
     }
 }
