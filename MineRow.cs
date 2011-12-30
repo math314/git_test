@@ -19,6 +19,14 @@ namespace git_test
             get { return _rowIdx; }
         }
 
+        /// <summary>
+        /// 親のテーブル
+        /// </summary>
+        public MineTable Table
+        {
+            get { return _parent; }
+        }
+
         private readonly MineCell[] _cells;
 
         /// <summary>
