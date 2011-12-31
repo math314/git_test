@@ -32,19 +32,28 @@ namespace git_test
         /// </summary>
         public void Draw()
         {
-            //カーソルの位置を最初に戻す
-            Console.SetCursorPosition(0, 0);
+            Console.CursorVisible = false; //カーソルのちらつきを抑えるために見えなくする
 
-            //セルの状態を描画する
-            Console.Write(GetCells());
+            try
+            {
+                //カーソルの位置を最初に戻す
+                Console.SetCursorPosition(0, 0);
 
-            Console.WriteLine("");
+                //セルの状態を描画する
+                Console.Write(GetCells());
 
-            //テーブルの情報を描画する
-            Console.Write(GetTableInfo());
+                Console.WriteLine("");
 
-            //カーソルの位置を戻す
-            Console.SetCursorPosition(_model.Current.ColumnIndex, _model.Current.RowIndex);
+                //テーブルの情報を描画する
+                Console.Write(GetTableInfo());
+
+                //カーソルの位置を戻す
+                Console.SetCursorPosition(_model.Current.ColumnIndex, _model.Current.RowIndex);
+            }
+            finally
+            {
+                Console.CursorVisible = true; //カーソルを見えるように戻す
+            }
         }
 
         /// <summary>

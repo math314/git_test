@@ -158,7 +158,7 @@ namespace git_test
             //同じ列のセル
             if (ColumnIndex > 0)
                 yield return Table[RowIndex][ColumnIndex - 1];
-            if (ColumnIndex < Table.RowCount - 1)
+            if (ColumnIndex < Table.ColumnCount - 1)
                 yield return Table[RowIndex][ColumnIndex + 1];
 
             //下のセル
