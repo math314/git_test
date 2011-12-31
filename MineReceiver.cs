@@ -26,7 +26,7 @@ namespace git_test
             switch (ck.Key)
             {
                 case ConsoleKey.Enter:
-                    _ctl.OpenCurrentCell();　//現在のセルを選択状態にする
+                    _ctl.PressOpen();       //openキーを押された
                     break;
                 case ConsoleKey.F:
                     _ctl.TurnFlag();         //フラグを立てる

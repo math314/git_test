@@ -67,6 +67,14 @@ namespace git_test
             _parent = parent;
             _index = col;
 
+            Reset(); //リセットを行う
+        }
+
+        /// <summary>
+        /// リセット
+        /// </summary>
+        public void Reset()
+        {
             IsBomb = false;
             IsOpened = false;
             IsFlaged = false;
@@ -190,7 +198,6 @@ namespace git_test
         {
             return string.Format("({0},{1}) : {2}", ColumnIndex, RowIndex, ToChar());
         }
-
 
         /// <summary>
         /// 自身が開かれていて、周りのフラグが十分に立てられている時(周りのボム数 = 周りのフラグ数)に

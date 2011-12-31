@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleCanvas.cs" />
+    <Compile Include="ConsoleCanvasManager.cs" />
     <Compile Include="MineCell.cs" />
     <Compile Include="MineController.cs" />
     <Compile Include="MineModel.cs" />

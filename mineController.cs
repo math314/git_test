@@ -22,43 +22,6 @@ namespace git_test
         public MineController(MineModel model)
         {
             _model = model;
-
-            InitModel(); //モデルの初期化
-        }
-
-        /// <summary>
-        /// モデルの初期化
-        /// </summary>
-        private void InitModel()
-        {
-            if(_model.BombSum > _model.Table.ColumnCount * _model.Table.RowCount)
-                throw new Exception("ボムの量が多すぎます");
-
-            Random rand = new Random(); //乱数生成器
-            for (int i = 0; i < _model.BombSum; i++)
-            {
-                    int row = rand.Next(table.RowCount);
-                    int col = rand.Next(table.ColumnCount);
-                MineCell cell = table[row][col]; 
-
-                while(cell.IsBomb) //もしボムなら
-                    cell = cell.NextCell(); //次のセルを取得
-
-                    table[row][col].IsBomb = true; // ボムを設定する
-            }
-        }
-
-        /// <summary>
-        /// 現在のセルを開く
-        /// </summary>
-        public void OpenCurrentCell()
-        {
-            var current = _model.Current;
-
-            if (current.IsOpened) //既に開かれていたら
-                return; //何もせず帰る
-
-            current.Open();    //現在のセルを開く
         }
 
         /// <summary>
@@ -101,6 +64,65 @@ namespace git_test
         public void OpenAroundIfFlagsFilled()
         {
             _model.Current.OpenAroundIfFlagsFilled();
+        }
+
+        public void PressOpen()
+        {
+            if (_model.IsGameStarted) //ゲーム中なら
+            {
+                OpenCurrentCell();　//現在のセルを選択状態にする
+            }
+            else
+            {
+                GameStart();        //ゲームの開始
+            }
+        }
+
+        /// <summary>
+        /// ゲームを開始する
+        /// </summary>
+        private void GameStart()
+        {
+            LayBombs(); //ボムを配置する
+
+            _model.IsGameStarted = true; //ゲーム開始フラグを立てる
+        }
+
+        /// <summary>
+        /// ボムを配置する
+        /// </summary>
+        private void LayBombs()
+        {
+            table.Reset();
+
+            if (_model.BombSum > _model.Table.ColumnCount * _model.Table.RowCount)
+                throw new Exception("ボムの量が多すぎます");
+
+            Random rand = new Random(); //乱数生成器
+            for (int i = 0; i < _model.BombSum; i++)
+            {
+                int row = rand.Next(table.RowCount);
+                int col = rand.Next(table.ColumnCount);
+                MineCell cell = table[row][col];
+
+                while (cell.IsBomb) //もしボムなら
+                    cell = cell.NextCell(); //次のセルを取得
+
+                table[row][col].IsBomb = true; // ボムを設定する
+            }
+        }
+
+        /// <summary>
+        /// 現在のセルを開く
+        /// </summary>
+        private void OpenCurrentCell()
+        {
+            var current = _model.Current;
+
+            if (current.IsOpened) //既に開かれていたら
+                return; //何もせず帰る
+
+            current.Open();    //現在のセルを開く
         }
     }
 }

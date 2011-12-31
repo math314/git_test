@@ -34,7 +34,7 @@ namespace git_test
             _model = model;
 
             _mineTableCanvas = new ConsoleCanvas(new Rectangle(1, 1, table.ColumnCount, table.RowCount));
-            _mineTableInfoCanvas = new ConsoleCanvas(new Rectangle(table.ColumnCount + 10, 1, 10, table.RowCount));
+            _mineTableInfoCanvas = new ConsoleCanvas(new Rectangle(table.ColumnCount + 10, 8, 10, table.RowCount));
 
             _conManager.AddCanvas(_mineTableCanvas);
             _conManager.AddCanvas(_mineTableInfoCanvas);
@@ -46,7 +46,9 @@ namespace git_test
         public void Draw()
         {
             //カーソルの位置を設定する
-            _conManager.SetCursor(_mineTableCanvas.Rect.X + _model.Current.ColumnIndex, _mineTableCanvas.Rect.Y + _model.Current.RowIndex);
+            _conManager.SetCursor(
+                _mineTableCanvas.Rect.X + _model.Current.ColumnIndex,
+                _mineTableCanvas.Rect.Y + _model.Current.RowIndex);
 
             //セルの状態を描画する
             _mineTableCanvas.SB.Append(GetCells());
@@ -81,8 +83,18 @@ namespace git_test
 
         private string GetTableInfo()
         {
-            return string.Format("cursor : col {0},row {1}", _model.Current.ColumnIndex, _model.Current.RowIndex)
-                .PadRight(30);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("cursor : col {0},row {1}", _model.Current.ColumnIndex, _model.Current.RowIndex);
+            sb.Append("\n\n");
+            sb.AppendFormat("Bomb : {0}",_model.BombSum - _model.FlagSum);
+
+            if (!_model.IsGameStarted)
+            {
+                sb.Append("\n\n");
+                sb.Append("Press Enter And Start Game");
+            }
+
+            return sb.ToString();
         }
 
         public void Dispose()

@@ -7,6 +7,8 @@ namespace git_test
 {
     public class MineModel
     {
+        #region メンバ変数、プロパティ
+
         private MineTable _table;
 
         /// <summary>
@@ -42,11 +44,29 @@ namespace git_test
         /// </summary>
         public int BombSum { get; set; }
 
+        /// <summary>
+        /// フラグの合計数
+        /// </summary>
+        public int FlagSum
+        {
+            get
+            {
+                return _table.Sum(row => row.Count(cell => cell.IsFlaged));
+            }
+        }
+
+        /// <summary>
+        /// ゲームが開始されているか
+        /// </summary>
+        public bool IsGameStarted { get; set; }
+
+        #endregion
 
         public MineModel()
         {
             _table = new MineTable(40, 20);
             BombSum = 60;
+            IsGameStarted = false; 
         }
     }
 }

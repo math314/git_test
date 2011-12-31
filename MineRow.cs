@@ -52,6 +52,17 @@ namespace git_test
             }
         }
 
+        /// <summary>
+        /// リセット
+        /// </summary>
+        public void Reset()
+        {
+            foreach (var cell in _cells)
+            {
+                cell.Reset();
+            }
+        }
+
         public IEnumerator<MineCell> GetEnumerator()
         {
             foreach (var item in _cells)

@@ -74,5 +74,16 @@ namespace git_test
         {
             return GetEnumerator();
         }
+
+        /// <summary>
+        /// リセット
+        /// </summary>
+        public void Reset()
+        {
+            foreach (var row in _rows)
+            {
+                row.Reset();
+            }
+        }
     }
 }
