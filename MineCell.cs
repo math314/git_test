@@ -57,6 +57,11 @@ namespace git_test
 
         #endregion
 
+        /// <summary>
+        /// セルを作成します
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="col"></param>
         public MineCell(MineRow parent, int col)
         {
             _parent = parent;
@@ -177,6 +182,10 @@ namespace git_test
             }
         }
 
+        /// <summary>
+        /// ToStringのoverride
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return string.Format("({0},{1}) : {2}", ColumnIndex, RowIndex, ToChar());
