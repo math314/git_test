@@ -93,5 +93,14 @@ namespace git_test
         {
             _model.Current.TurnFlag();
         }
+
+        /// <summary>
+        /// 自身が開かれていて、周りのフラグが十分に立てられている時(周りのボム数 = 周りのフラグ数)に
+        /// 周りのセルを全て開きます
+        /// </summary>
+        public void OpenAroundIfFlagsFilled()
+        {
+            _model.Current.OpenAroundIfFlagsFilled();
+        }
     }
 }

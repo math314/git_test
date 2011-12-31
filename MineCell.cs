@@ -61,6 +61,10 @@ namespace git_test
         {
             _parent = parent;
             _index = col;
+
+            IsBomb = false;
+            IsOpened = false;
+            IsFlaged = false;
         }
 
         /// <summary>
@@ -71,7 +75,8 @@ namespace git_test
             if (IsOpened || IsFlaged)
                 return; //開けなかった
 
-            IsOpened = true;
+            IsOpened = true;  //開く
+            IsFlaged = false; //旗を念のため下ろしておく
 
             if (IsBomb)
                 return; //ボムだったら帰る
@@ -174,7 +179,25 @@ namespace git_test
 
         public override string ToString()
         {
-            return string.Format("({0},{1}) : {2}",ColumnIndex,RowIndex, ToChar());
+            return string.Format("({0},{1}) : {2}", ColumnIndex, RowIndex, ToChar());
         }
+
+
+        /// <summary>
+        /// 自身が開かれていて、周りのフラグが十分に立てられている時(周りのボム数 = 周りのフラグ数)に
+        /// 周りのセルを全て開きます
+        /// </summary>
+        public void OpenAroundIfFlagsFilled()
+        {
+            if (!IsOpened)
+                return; //開かれていない
+
+            if (CountAroundBombs() == EnumerateAroundCells().Count(cell => cell.IsFlaged)) //ボム数 = フラグ数
+            {
+                foreach (var cell in EnumerateAroundCells())
+                    cell.Open(); //周りのセルも開く
+            }
+        }
+
     }
 }

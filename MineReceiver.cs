@@ -31,6 +31,9 @@ namespace git_test
                 case ConsoleKey.F:
                     _ctl.TurnFlag();         //フラグを立てる
                     break;
+                case ConsoleKey.Spacebar:
+                    _ctl.OpenAroundIfFlagsFilled(); //ボム数 = フラグ数 ---> 周りも開く
+                    break;
                 case ConsoleKey.UpArrow:
                     _ctl.MoveCursor(MoveDirection.Up);
                     break;
