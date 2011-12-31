@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Drawing;
 
 namespace git_test
 {
-    public class MineView
+    public class MineView : IDisposable
     {
         private readonly MineModel _model;
 
         private readonly ConsoleCanvasManager _conManager = new ConsoleCanvasManager();
+
+        private readonly ConsoleCanvas _mineTableCanvas;
+
+        private readonly ConsoleCanvas _mineTableInfoCanvas;
 
         /// <summary>
         /// MineTableの取得
@@ -27,6 +32,12 @@ namespace git_test
         public MineView(MineModel model)
         {
             _model = model;
+
+            _mineTableCanvas = new ConsoleCanvas(new Rectangle(1, 1, table.ColumnCount, table.RowCount));
+            _mineTableInfoCanvas = new ConsoleCanvas(new Rectangle(table.ColumnCount + 10, 1, 10, table.RowCount));
+
+            _conManager.AddCanvas(_mineTableCanvas);
+            _conManager.AddCanvas(_mineTableInfoCanvas);
         }
 
         /// <summary>
@@ -34,30 +45,16 @@ namespace git_test
         /// </summary>
         public void Draw()
         {
+            //カーソルの位置を設定する
+            _conManager.SetCursor(_mineTableCanvas.Rect.X + _model.Current.ColumnIndex, _mineTableCanvas.Rect.Y + _model.Current.RowIndex);
+
+            //セルの状態を描画する
+            _mineTableCanvas.SB.Append(GetCells());
+            //テーブルの情報を描画する
+            _mineTableInfoCanvas.SB.Append(GetTableInfo());
+
+            //全て描画
             _conManager.DrawAllCanvas();
-
-            //Console.CursorVisible = false; //カーソルのちらつきを抑えるために見えなくする
-
-            //try
-            //{
-            //    //カーソルの位置を最初に戻す
-            //    Console.SetCursorPosition(0, 0);
-
-            //    //セルの状態を描画する
-            //    Console.Write(GetCells());
-
-            //    Console.WriteLine("");
-
-            //    //テーブルの情報を描画する
-            //    Console.Write(GetTableInfo());
-
-            //    //カーソルの位置を戻す
-            //    Console.SetCursorPosition(_model.Current.ColumnIndex, _model.Current.RowIndex);
-            //}
-            //finally
-            //{
-            //    Console.CursorVisible = true; //カーソルを見えるように戻す
-            //}
         }
 
         /// <summary>
@@ -86,6 +83,11 @@ namespace git_test
         {
             return string.Format("cursor : col {0},row {1}", _model.Current.ColumnIndex, _model.Current.RowIndex)
                 .PadRight(30);
+        }
+
+        public void Dispose()
+        {
+            _conManager.Dispose();
         }
     }
 }
