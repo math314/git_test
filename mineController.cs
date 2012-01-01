@@ -126,6 +126,13 @@ namespace git_test
             current.Open();    //現在のセルを開く
         }
 
+        /// <summary>
+        /// フレームの開始
+        /// </summary>
+        public void StartFrame()
+        {
+            StartFrame(true);
+        }
 
         /// <summary>
         /// フレームの開始
