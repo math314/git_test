@@ -60,6 +60,12 @@ namespace git_test
         /// </summary>
         public bool IsGameStarted { get; set; }
 
+        /// <summary>
+        /// ゲームの時間
+        /// </summary>
+        public int GameTime { get; set; }
+
+
         #endregion
 
         public MineModel()

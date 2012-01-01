@@ -85,6 +85,7 @@ namespace git_test
         {
             LayBombs(); //ボムを配置する
 
+            _model.GameTime = 0;         //ゲーム時間の初期化を行う
             _model.IsGameStarted = true; //ゲーム開始フラグを立てる
         }
 
@@ -124,5 +125,23 @@ namespace git_test
 
             current.Open();    //現在のセルを開く
         }
+
+
+        /// <summary>
+        /// フレームの開始
+        /// </summary>
+        /// <param name="hasInput"></param>
+        public void StartFrame(bool hasInput)
+        {
+
+        }
+
+        /// <summary>
+        /// フレームの終了
+        /// </summary>
+        public void EndFrame()
+        {
+        }
+
     }
 }
